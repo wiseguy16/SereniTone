@@ -1,4 +1,5 @@
 import React from "react";
+import * as Slider from "@radix-ui/react-slider";
 
 const CONTROL_CONFIG = [
   { key: "noiseLevel", label: "Masking", min: 0, max: 1, step: 0.01 },
@@ -49,6 +50,30 @@ function ControlsGraphic() {
 }
 
 export default function Controls({ params, onChange }) {
+  const renderSlider = (control) => (
+    <label className="field slider-field" key={control.key}>
+      <div className="field-row">
+        <span>{control.label}</span>
+        <strong>{params[control.key].toFixed(2)}</strong>
+      </div>
+      <Slider.Root
+        aria-label={control.label}
+        className="slider-root"
+        max={control.max}
+        min={control.min}
+        onValueChange={([value]) => onChange(control.key, Number(value))}
+        step={control.step}
+        value={[params[control.key]]}
+      >
+        <Slider.Track className="slider-track">
+          <Slider.Range className="slider-range" />
+        </Slider.Track>
+        <Slider.Thumb className="slider-thumb" />
+      </Slider.Root>
+      {control.help ? <small>{control.help}</small> : null}
+    </label>
+  );
+
   return (
     <div className="panel">
       <div className="panel-heading">
@@ -59,24 +84,7 @@ export default function Controls({ params, onChange }) {
       <ControlsGraphic />
 
       <div className="controls-list">
-        {CONTROL_CONFIG.map((control) => (
-          <label className="field" key={control.key}>
-            <div className="field-row">
-              <span>{control.label}</span>
-              <strong>{params[control.key].toFixed(2)}</strong>
-            </div>
-            <input
-              type="range"
-              min={control.min}
-              max={control.max}
-              step={control.step}
-              value={params[control.key]}
-              onChange={(event) =>
-                onChange(control.key, Number(event.target.value))
-              }
-            />
-          </label>
-        ))}
+        {CONTROL_CONFIG.map(renderSlider)}
       </div>
 
       <div className="advanced-controls">
@@ -84,25 +92,7 @@ export default function Controls({ params, onChange }) {
           <p className="eyebrow">Advanced</p>
           <h3>Optional sound layers</h3>
         </div>
-        {ADVANCED_CONTROL_CONFIG.map((control) => (
-          <label className="field" key={control.key}>
-            <div className="field-row">
-              <span>{control.label}</span>
-              <strong>{params[control.key].toFixed(2)}</strong>
-            </div>
-            <input
-              type="range"
-              min={control.min}
-              max={control.max}
-              step={control.step}
-              value={params[control.key]}
-              onChange={(event) =>
-                onChange(control.key, Number(event.target.value))
-              }
-            />
-            <small>{control.help}</small>
-          </label>
-        ))}
+        {ADVANCED_CONTROL_CONFIG.map(renderSlider)}
       </div>
     </div>
   );

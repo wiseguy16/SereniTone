@@ -1,4 +1,5 @@
 import React from "react";
+import * as Slider from "@radix-ui/react-slider";
 import { buildTriage } from "../logic/profile";
 
 const OPTIONS = {
@@ -127,13 +128,20 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
           label="How easily do everyday sounds start to feel like too much?"
           help="This helps us decide whether to start with a softer, gentler soundscape."
         >
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={values.sensitivity}
-            onChange={(event) => onChange("sensitivity", Number(event.target.value))}
-          />
+          <Slider.Root
+            aria-label="Sound sensitivity"
+            className="slider-root"
+            max={100}
+            min={0}
+            onValueChange={([value]) => onChange("sensitivity", Number(value))}
+            step={1}
+            value={[values.sensitivity]}
+          >
+            <Slider.Track className="slider-track">
+              <Slider.Range className="slider-range" />
+            </Slider.Track>
+            <Slider.Thumb className="slider-thumb" />
+          </Slider.Root>
           <strong>{sensitivityLabel(values.sensitivity)}</strong>
         </Field>
 
