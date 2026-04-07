@@ -259,7 +259,7 @@ export default function App() {
     <main className="app-shell">
       <section className="hero">
         <p className="eyebrow">SereniTone</p>
-        <h1>A softer place to begin when silence feels loud.</h1>
+        <h1>A soft place to begin when silence feels loud.</h1>
         <p className="hero-copy">
           SereniTone helps you describe what you are noticing, suggests a calm
           starting sound, and lets you shape it in real time. Everything runs in
