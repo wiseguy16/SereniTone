@@ -372,16 +372,6 @@ export default function App() {
                 <button className="primary-button" onClick={handleTogglePlayback} type="button">
                   {isPlaying ? "Pause soundscape" : "Start soundscape"}
                 </button>
-                <button
-                  className="secondary-button"
-                  onClick={() => {
-                    const suggested = `${profile.triage?.recommendedModelName} preset`;
-                    setPresetName((current) => current || suggested);
-                  }}
-                  type="button"
-                >
-                  Name &amp; save
-                </button>
               </div>
             </div>
 
