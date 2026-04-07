@@ -86,10 +86,113 @@ button {
   color: #ffd4a6;
 }
 
+.intro-lead,
+.intro-question-panel {
+  grid-column: 1 / -1;
+}
+
+.intro-lead {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.intro-lead h2,
+.setup-bridge-panel h2 {
+  margin: 0.2rem 0 0.75rem;
+}
+
+.intro-card-panel {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.intro-card {
+  padding: 1.2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 16rem;
+}
+
+.intro-card h3 {
+  margin: 0.2rem 0 0.75rem;
+}
+
+.intro-step-dots {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.intro-step-dot {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(242, 238, 228, 0.78);
+}
+
+.intro-step-dot.active {
+  background: rgba(240, 154, 75, 0.22);
+  border-color: rgba(240, 154, 75, 0.4);
+  color: #ffd4a6;
+}
+
+.intro-nav,
+.intro-transition {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.choice-card {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f2eee4;
+  border-radius: 18px;
+  padding: 1rem 0.9rem;
+  text-align: left;
+  min-height: 5.6rem;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.choice-card:hover {
+  transform: translateY(-1px);
+}
+
+.choice-card.active {
+  background: rgba(240, 154, 75, 0.16);
+  border-color: rgba(240, 154, 75, 0.4);
+  color: #ffd4a6;
+}
+
+.setup-bridge-panel {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: start;
+}
+
 .workspace,
 .bottom-grid,
 .welcome-grid,
-.dashboard-grid {
+.dashboard-grid,
+.intro-flow,
+.setup-bridge {
   display: grid;
   gap: 1.25rem;
   margin-top: 1.25rem;
@@ -101,6 +204,15 @@ button {
 
 .welcome-grid {
   grid-template-columns: 1.1fr 0.9fr;
+}
+
+.intro-flow {
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: start;
+}
+
+.setup-bridge {
+  grid-template-columns: 1fr;
 }
 
 .dashboard-grid {
@@ -336,6 +448,11 @@ input[type="range"] {
   margin: 0 auto 0.25rem;
 }
 
+.section-graphic.intro-graphic {
+  max-width: 300px;
+  margin: 0 0 0 auto;
+}
+
 .section-graphic.hero-graphic {
   max-width: 360px;
   margin-top: 1.4rem;
@@ -505,6 +622,12 @@ input[type="range"] {
   transform: translateY(-1px);
 }
 
+.ghost-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
 .preset-footer {
   margin-top: 0.9rem;
   display: flex;
@@ -537,12 +660,20 @@ input[type="range"] {
   .dashboard-grid,
   .bottom-grid,
   .grid.two-col,
-  .feedback-grid {
+  .feedback-grid,
+  .intro-flow,
+  .choice-grid {
     grid-template-columns: 1fr;
   }
 
   .hero {
     padding: 2rem;
+  }
+
+  .intro-lead,
+  .intro-transition {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .player-summary,
@@ -558,5 +689,9 @@ input[type="range"] {
 
   .preset-card-actions {
     justify-content: stretch;
+  }
+
+  .section-graphic.intro-graphic {
+    margin: 0;
   }
 }

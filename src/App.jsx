@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import IntakeForm from "./components/IntakeForm";
 import Player from "./components/Player";
 import Controls from "./components/Controls";
+import IntroCards from "./components/IntroCards";
 import { createSoundscapeEngine } from "./audio/engine";
 import { applyFeedback } from "./logic/feedback";
 import { buildProfile, DEFAULT_PARAMS, profileToParams } from "./logic/profile";
@@ -127,6 +128,7 @@ function DashboardGraphic({ isPlaying }) {
 
 export default function App() {
   const engineRef = useRef(null);
+  const setupRef = useRef(null);
   const [formValues, setFormValues] = useState(INITIAL_FORM);
   const [profile, setProfile] = useState(null);
   const [params, setParams] = useState(DEFAULT_PARAMS);
@@ -134,6 +136,7 @@ export default function App() {
   const [savedPresets, setSavedPresets] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState("");
+  const [showSetup, setShowSetup] = useState(false);
 
   if (!engineRef.current) {
     engineRef.current = createSoundscapeEngine();
@@ -170,6 +173,23 @@ export default function App() {
 
   const handleFormChange = (key, value) => {
     setFormValues((current) => ({ ...current, [key]: value }));
+  };
+
+  const handleIntroSoundChoice = (value) => {
+    setFormValues((current) => ({
+      ...current,
+      hasTinnitus: true,
+      soundCharacter: value,
+      tinnitusType: value === "whoosh" ? "pulsatile" : current.tinnitusType,
+    }));
+  };
+
+  const handleContinueToSetup = () => {
+    setShowSetup(true);
+
+    window.setTimeout(() => {
+      setupRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
   };
 
   const handleGenerate = (event) => {
@@ -261,75 +281,66 @@ export default function App() {
         <p className="eyebrow">SereniTone</p>
         <h1>A soft place to begin when silence feels loud.</h1>
         <p className="hero-copy">
-          SereniTone helps you describe what you are noticing, suggests a calm
-          starting sound, and lets you shape it in real time. Everything runs in
-          your browser.
+          SereniTone helps you understand what may be happening, why sound can
+          help, and how to start with a gentle supportive mix before you fine-tune it.
         </p>
         <div className="hero-badges">
-          <span>Client-side only</span>
+          <span>Sound therapy principles</span>
           <span>Non-diagnostic</span>
-          <span>Procedural audio</span>
+          <span>Gentle setup first</span>
         </div>
         <HeroGraphic />
       </section>
 
-      <section className="welcome-grid">
-        <div className="panel welcome-panel">
-          <p className="eyebrow">Welcome</p>
-          <h2>You do not need the perfect words first.</h2>
-          <p>
-            Many people can tell that a sound is bothering them long before they
-            can describe it clearly. SereniTone is meant to help you sort that
-            out gently, then move into a soundscape you can actually try.
-          </p>
-          <WelcomeGraphic />
-        </div>
-        <div className="panel steps-panel">
-          <p className="eyebrow">How It Works</p>
-          <div className="steps-list">
-            <div className="step-card">
-              <strong>1. Describe</strong>
-              <span>Tell us what the sound is like and when you notice it most.</span>
-            </div>
-            <div className="step-card">
-              <strong>2. Start</strong>
-              <span>We suggest a soothing model and set a first mix for you.</span>
-            </div>
-            <div className="step-card">
-              <strong>3. Refine</strong>
-              <span>Listen, adjust, and save what feels most supportive.</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <IntroCards
+        selectedCharacter={formValues.soundCharacter}
+        onSelectCharacter={handleIntroSoundChoice}
+        onContinue={handleContinueToSetup}
+      />
 
-      <section className="workspace">
-        <IntakeForm values={formValues} onChange={handleFormChange} onSubmit={handleGenerate} />
-
-        <div className="stack">
-          {profile ? (
-            <>
-              <Player
-                profile={profile}
-                params={params}
-                isPlaying={isPlaying}
-                onTogglePlayback={handleTogglePlayback}
-                onFeedback={handleFeedback}
-              />
-              <Controls params={params} onChange={handleControlChange} />
-            </>
-          ) : (
-            <div className="panel empty-state">
-              <p className="eyebrow">Next step</p>
-              <h2>Create your first soundscape</h2>
-              <p>
-                Answer the intake questions to generate a starting mix tuned for
-                your environment and listening preferences.
+      {showSetup || profile ? (
+        <>
+          <section className="setup-bridge" ref={setupRef}>
+            <div className="panel setup-bridge-panel">
+              <p className="eyebrow">Gentle Setup</p>
+              <h2>Now let&apos;s tailor a starting sound for you.</h2>
+              <p className="muted-text">
+                We&apos;ll use a few simple questions to choose a calmer starting point,
+                then you can listen and adjust in real time.
               </p>
+              <WelcomeGraphic />
             </div>
-          )}
-        </div>
-      </section>
+          </section>
+
+          <section className="workspace">
+            <IntakeForm values={formValues} onChange={handleFormChange} onSubmit={handleGenerate} />
+
+            <div className="stack">
+              {profile ? (
+                <>
+                  <Player
+                    profile={profile}
+                    params={params}
+                    isPlaying={isPlaying}
+                    onTogglePlayback={handleTogglePlayback}
+                    onFeedback={handleFeedback}
+                  />
+                  <Controls params={params} onChange={handleControlChange} />
+                </>
+              ) : (
+                <div className="panel empty-state">
+                  <p className="eyebrow">Next step</p>
+                  <h2>Your soundscape will appear here</h2>
+                  <p>
+                    Finish the gentle setup and we&apos;ll suggest a starting mix that
+                    you can try right away.
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+        </>
+      ) : null}
 
       {profile ? (
         <>

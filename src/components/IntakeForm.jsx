@@ -77,11 +77,11 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
   return (
     <form className="panel intake-panel" onSubmit={onSubmit}>
       <div className="panel-heading">
-        <p className="eyebrow">Gentle Intake</p>
-        <h2>Tell us what you notice most</h2>
+        <p className="eyebrow">Gentle Setup</p>
+        <h2>Tell us a little more about what you&apos;re noticing</h2>
         <p className="muted-text">
-          This is a short, non-diagnostic check-in. We use it to choose a calmer
-          starting sound and explain why it may help.
+          This takes about a minute. We use it to choose a calmer starting sound
+          and explain why it may help.
         </p>
         <IntakeGraphic />
       </div>

@@ -185,21 +185,21 @@ export function buildTriage(form) {
 }
 
 function chooseSoundModel(form) {
-  if (form.soundStyle === "cabin") {
+  if (form.audioType === "cabin") {
     return {
       key: "airplane",
       reason: "you chose a steady cabin-like starting atmosphere",
     };
   }
 
-  if (form.soundStyle === "ocean") {
+  if (form.audioType === "ocean") {
     return {
       key: "ocean",
       reason: "you chose a softer ocean-like starting atmosphere",
     };
   }
 
-  if (form.soundStyle === "neutral") {
+  if (form.audioType === "neutral") {
     return {
       key: "airplane",
       reason: "you chose a more neutral and steady starting atmosphere",
