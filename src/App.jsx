@@ -281,8 +281,10 @@ export default function App() {
         <p className="eyebrow">SereniTone</p>
         <h1>A soft place to begin when silence feels loud.</h1>
         <p className="hero-copy">
-          SereniTone helps you understand what may be happening, why sound can
-          help, and how to start with a gentle supportive mix before you fine-tune it.
+          SereniTone is here to help when hearing feels different, silence feels
+          loud, or internal sound is hard to ignore. It helps you make sense of
+          ringing, hissing, or sound sensitivity and guides you into a gentle
+          sound mix you can fine-tune.
         </p>
         <div className="hero-badges">
           <span>Sound therapy principles</span>
