@@ -94,9 +94,11 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
               key={step.title}
               className={index === activeStep ? "intro-step-dot active" : "intro-step-dot"}
               onClick={() => setActiveStep(index)}
+              title={step.eyebrow}
               type="button"
             >
-              {index + 1}
+              <span className="intro-step-number">{index + 1}</span>
+              <span className="intro-step-label">{step.eyebrow}</span>
             </button>
           ))}
         </div>

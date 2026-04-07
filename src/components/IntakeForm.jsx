@@ -224,8 +224,12 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
       </div>
 
       <div className="triage-card">
-        <p className="eyebrow">What We Hear</p>
+        <p className="eyebrow">Live Preview</p>
         <h3>{triage.headline}</h3>
+        <p className="muted-text">
+          This preview updates as you answer the setup questions. We&apos;ll use
+          it to create your starting soundscape when you submit.
+        </p>
         {triage.explanation.map((item) => (
           <p key={item} className="muted-text">
             {item}

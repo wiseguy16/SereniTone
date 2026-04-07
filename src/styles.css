@@ -122,23 +122,46 @@ button {
 }
 
 .intro-step-dots {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.65rem;
 }
 
 .intro-step-dot {
-  width: 2.3rem;
-  height: 2.3rem;
-  border-radius: 999px;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 0.7rem 0.5rem 0.8rem;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.04);
   color: rgba(242, 238, 228, 0.78);
+}
+
+.intro-step-number {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+}
+
+.intro-step-label {
+  font-size: 0.78rem;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .intro-step-dot.active {
   background: rgba(240, 154, 75, 0.22);
   border-color: rgba(240, 154, 75, 0.4);
   color: #ffd4a6;
+}
+
+.intro-step-dot.active .intro-step-number {
+  background: rgba(240, 154, 75, 0.22);
 }
 
 .intro-nav,

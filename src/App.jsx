@@ -332,10 +332,10 @@ export default function App() {
               ) : (
                 <div className="panel empty-state">
                   <p className="eyebrow">Next step</p>
-                  <h2>Your soundscape will appear here</h2>
+                  <h2>Your player will appear here</h2>
                   <p>
-                    Finish the gentle setup and we&apos;ll suggest a starting mix that
-                    you can try right away.
+                    Finish the gentle setup, then click <strong>See my starting soundscape</strong>{" "}
+                    to generate your first mix and open the player.
                   </p>
                 </div>
               )}
@@ -360,7 +360,11 @@ export default function App() {
                 <div className="hero-badges">
                   <span>Goal: {profile.goal}</span>
                   <span>Pattern: {profile.triage?.headline}</span>
-                  <span>Presets: {savedPresets.length}</span>
+                  {savedPresets.length > 0 ? (
+                    <span>Presets: {savedPresets.length}</span>
+                  ) : (
+                    <span>No presets saved</span>
+                  )}
                 </div>
               </div>
               <div className="dashboard-hero-actions">
@@ -376,7 +380,7 @@ export default function App() {
                   }}
                   type="button"
                 >
-                  Prepare preset name
+                  Name &amp; save
                 </button>
               </div>
             </div>
