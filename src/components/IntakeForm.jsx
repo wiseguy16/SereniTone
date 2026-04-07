@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import { buildTriage } from "../logic/profile";
 
@@ -74,6 +74,7 @@ function IntakeGraphic() {
 
 export default function IntakeForm({ values, onChange, onSubmit }) {
   const triage = buildTriage(values);
+  const sensitivityDraggingRef = useRef(false);
 
   return (
     <form className="panel intake-panel" onSubmit={onSubmit}>
@@ -133,22 +134,26 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
             className="slider-root"
             max={100}
             min={0}
-            onPointerDownCapture={(event) => {
-              if (
-                event.target instanceof Element &&
-                !event.target.closest(".slider-thumb")
-              ) {
-                event.preventDefault();
+            onValueChange={([value]) => {
+              if (sensitivityDraggingRef.current) {
+                onChange("sensitivity", Number(value));
               }
             }}
-            onValueChange={([value]) => onChange("sensitivity", Number(value))}
+            onValueCommit={() => {
+              sensitivityDraggingRef.current = false;
+            }}
             step={1}
             value={[values.sensitivity]}
           >
             <Slider.Track className="slider-track">
               <Slider.Range className="slider-range" />
             </Slider.Track>
-            <Slider.Thumb className="slider-thumb" />
+            <Slider.Thumb
+              className="slider-thumb"
+              onPointerDown={() => {
+                sensitivityDraggingRef.current = true;
+              }}
+            />
           </Slider.Root>
           <strong>{sensitivityLabel(values.sensitivity)}</strong>
         </Field>

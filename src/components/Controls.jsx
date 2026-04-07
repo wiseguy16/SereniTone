@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import * as Slider from "@radix-ui/react-slider";
 
 const CONTROL_CONFIG = [
@@ -49,39 +49,47 @@ function ControlsGraphic() {
   );
 }
 
-export default function Controls({ params, onChange }) {
-  const renderSlider = (control) => (
+function RadixSliderField({ control, value, onChange }) {
+  const isDraggingRef = useRef(false);
+
+  return (
     <label className="field slider-field" key={control.key}>
       <div className="field-row">
         <span>{control.label}</span>
-        <strong>{params[control.key].toFixed(2)}</strong>
+        <strong>{value.toFixed(2)}</strong>
       </div>
       <Slider.Root
         aria-label={control.label}
         className="slider-root"
         max={control.max}
         min={control.min}
-        onPointerDownCapture={(event) => {
-          if (
-            event.target instanceof Element &&
-            !event.target.closest(".slider-thumb")
-          ) {
-            event.preventDefault();
+        onValueChange={([nextValue]) => {
+          if (isDraggingRef.current) {
+            onChange(control.key, Number(nextValue));
           }
         }}
-        onValueChange={([value]) => onChange(control.key, Number(value))}
+        onValueCommit={() => {
+          isDraggingRef.current = false;
+        }}
         step={control.step}
-        value={[params[control.key]]}
+        value={[value]}
       >
         <Slider.Track className="slider-track">
           <Slider.Range className="slider-range" />
         </Slider.Track>
-        <Slider.Thumb className="slider-thumb" />
+        <Slider.Thumb
+          className="slider-thumb"
+          onPointerDown={() => {
+            isDraggingRef.current = true;
+          }}
+        />
       </Slider.Root>
       {control.help ? <small>{control.help}</small> : null}
     </label>
   );
+}
 
+export default function Controls({ params, onChange }) {
   return (
     <div className="panel">
       <div className="panel-heading">
@@ -92,7 +100,14 @@ export default function Controls({ params, onChange }) {
       <ControlsGraphic />
 
       <div className="controls-list">
-        {CONTROL_CONFIG.map(renderSlider)}
+        {CONTROL_CONFIG.map((control) => (
+          <RadixSliderField
+            control={control}
+            key={control.key}
+            onChange={onChange}
+            value={params[control.key]}
+          />
+        ))}
       </div>
 
       <div className="advanced-controls">
@@ -100,7 +115,14 @@ export default function Controls({ params, onChange }) {
           <p className="eyebrow">Advanced</p>
           <h3>Optional sound layers</h3>
         </div>
-        {ADVANCED_CONTROL_CONFIG.map(renderSlider)}
+        {ADVANCED_CONTROL_CONFIG.map((control) => (
+          <RadixSliderField
+            control={control}
+            key={control.key}
+            onChange={onChange}
+            value={params[control.key]}
+          />
+        ))}
       </div>
     </div>
   );
