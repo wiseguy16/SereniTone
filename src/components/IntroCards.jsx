@@ -69,8 +69,10 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
           <p className="eyebrow">Welcome</p>
           <h2>Start with understanding, not guesswork.</h2>
           <p>
-            Tinnitus is the word often used for hearing a sound that other
-            people do not hear, like ringing, hissing, buzzing, or humming.
+            Not everybody hears the exact same way. Some people notice an extra
+            layer of sound that can make quiet feel uncomfortable or make it
+            harder to focus. The scientific word for that extra sound is
+            tinnitus. It can show up as ringing, hissing, buzzing, or humming.
           </p>
           <p>
             SereniTone helps you understand that experience and use gentle
