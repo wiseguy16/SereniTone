@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "fetch:hearing-updates": "node scripts/fetch-hearing-updates.mjs",
+    "build": "npm run fetch:hearing-updates && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

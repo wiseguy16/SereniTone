@@ -3,6 +3,7 @@ import IntakeForm from "./components/IntakeForm";
 import Player from "./components/Player";
 import Controls from "./components/Controls";
 import IntroCards from "./components/IntroCards";
+import HearingHealthUpdates from "./components/HearingHealthUpdates";
 import { createSoundscapeEngine } from "./audio/engine";
 import { applyFeedback } from "./logic/feedback";
 import { buildProfile, DEFAULT_PARAMS, profileToParams } from "./logic/profile";
@@ -299,6 +300,8 @@ export default function App() {
         onSelectCharacter={handleIntroSoundChoice}
         onContinue={handleContinueToSetup}
       />
+
+      <HearingHealthUpdates />
 
       {showSetup || profile ? (
         <>
