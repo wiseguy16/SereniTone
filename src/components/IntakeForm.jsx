@@ -137,7 +137,17 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
             step={1}
             value={[values.sensitivity]}
           >
-            <Slider.Track className="slider-track">
+            <Slider.Track
+              className="slider-track"
+              onPointerDownCapture={(event) => {
+                if (
+                  event.target instanceof Element &&
+                  !event.target.closest(".slider-thumb")
+                ) {
+                  event.preventDefault();
+                }
+              }}
+            >
               <Slider.Range className="slider-range" />
             </Slider.Track>
             <Slider.Thumb className="slider-thumb" />
