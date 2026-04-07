@@ -69,8 +69,12 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
           <p className="eyebrow">Welcome</p>
           <h2>Start with understanding, not guesswork.</h2>
           <p>
-            SereniTone helps your brain learn to pay less attention to internal
-            sound using gentle background audio and sound therapy principles.
+            Tinnitus is the word often used for hearing a sound that other
+            people do not hear, like ringing, hissing, buzzing, or humming.
+          </p>
+          <p>
+            SereniTone helps you understand that experience and use gentle
+            background sound to make it feel less intense and less central.
           </p>
           <p className="muted-text">
             You are not trying to fight the sound. You are creating a softer,
@@ -126,10 +130,10 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
       <div className="panel intro-question-panel">
         <div className="panel-heading">
           <p className="eyebrow">Your Sound Today</p>
-          <h3>What best describes your tinnitus today?</h3>
+          <h3>What best describes the sound you are noticing today?</h3>
           <p className="muted-text">
-            This helps us start from a sound profile that feels closer to what
-            you are already noticing.
+            People often call this tinnitus. This helps us start from a sound
+            profile that feels closer to what you are already noticing.
           </p>
         </div>
 
