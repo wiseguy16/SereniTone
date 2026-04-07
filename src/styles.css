@@ -352,11 +352,19 @@ input[type="range"] {
   border: 2px solid rgba(13, 23, 32, 0.9);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
   display: block;
+  position: relative;
 }
 
 .slider-thumb[data-focus-visible] {
   outline: 3px solid rgba(240, 154, 75, 0.35);
   outline-offset: 2px;
+}
+
+.slider-thumb::before {
+  content: "";
+  position: absolute;
+  inset: -0.45rem;
+  border-radius: 999px;
 }
 
 .slider-thumb:hover,
