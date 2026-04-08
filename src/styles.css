@@ -32,8 +32,30 @@ select {
   font: inherit;
 }
 
+a {
+  color: inherit;
+}
+
 button {
   cursor: pointer;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 1000;
+  padding: 0.7rem 0.95rem;
+  border-radius: 12px;
+  background: #f2ae64;
+  color: #1e140c;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 180ms ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
 }
 
 .app-shell {
@@ -292,6 +314,14 @@ button {
 
 .companion-link:hover {
   text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(240, 154, 75, 0.52);
+  outline-offset: 3px;
 }
 
 .panel-heading h2,
@@ -800,6 +830,21 @@ input[type="range"] {
 
 .error-text {
   color: #ffb1a6;
+}
+
+.error-text[aria-live] {
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 920px) {

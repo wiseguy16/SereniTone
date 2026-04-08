@@ -141,6 +141,11 @@ function SupportGraphic() {
   );
 }
 
+function prefersReducedMotion() {
+  return typeof window !== "undefined"
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export default function App() {
   const engineRef = useRef(null);
   const setupRef = useRef(null);
@@ -204,7 +209,10 @@ export default function App() {
     setShowSetup(true);
 
     window.setTimeout(() => {
-      setupRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      setupRef.current?.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "start",
+      });
     }, 60);
   };
 
@@ -218,7 +226,10 @@ export default function App() {
     setError("");
 
     window.setTimeout(() => {
-      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      playerRef.current?.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "start",
+      });
     }, 80);
   };
 
@@ -296,7 +307,9 @@ export default function App() {
   };
 
   return (
-    <main className="app-shell">
+    <>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <main className="app-shell" id="main-content">
       <section className="hero">
         <p className="eyebrow">SereniTone</p>
         <h1>A soft place to begin when silence feels loud.</h1>
@@ -331,6 +344,7 @@ export default function App() {
           </p>
           <a
             className="companion-link"
+            aria-label="Explore TinnitusGuide in a new tab"
             href={TINNITUS_GUIDE_URL}
             rel="noreferrer"
             target="_blank"
@@ -369,6 +383,7 @@ export default function App() {
                 </p>
                 <a
                   className="companion-link"
+                  aria-label="Use TinnitusGuide to describe what you hear in a new tab"
                   href={TINNITUS_GUIDE_URL}
                   rel="noreferrer"
                   target="_blank"
@@ -405,6 +420,7 @@ export default function App() {
                     </p>
                     <a
                       className="companion-link"
+                      aria-label="Open TinnitusGuide in a new tab"
                       href={TINNITUS_GUIDE_URL}
                       rel="noreferrer"
                       target="_blank"
@@ -494,6 +510,7 @@ export default function App() {
               ))}
               <a
                 className="companion-link"
+                aria-label="Visit TinnitusGuide in a new tab"
                 href={TINNITUS_GUIDE_URL}
                 rel="noreferrer"
                 target="_blank"
@@ -606,6 +623,7 @@ export default function App() {
           </section>
         </>
       ) : null}
-    </main>
+      </main>
+    </>
   );
 }

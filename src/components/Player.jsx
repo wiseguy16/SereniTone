@@ -30,7 +30,7 @@ export default function Player({
 
       <PlayerGraphic isPlaying={isPlaying} />
 
-      <div className="player-summary">
+      <div className="player-summary" aria-label="Current soundscape summary">
         <div>
           <span>Masking level</span>
           <strong>{Math.round(profile.maskingLevel * 100)}%</strong>
@@ -57,7 +57,7 @@ export default function Player({
         </p>
       </div>
 
-      <div className="feedback-grid">
+      <div className="feedback-grid" aria-label="Quick feedback controls">
         {FEEDBACK_OPTIONS.map((option) => (
           <button
             className="feedback-button"

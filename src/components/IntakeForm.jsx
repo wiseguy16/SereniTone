@@ -96,6 +96,7 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
         <Field label="Do you notice ringing or internal sound?">
           <div className="toggle-row">
             <button
+              aria-pressed={values.hasTinnitus}
               className={values.hasTinnitus ? "toggle active" : "toggle"}
               onClick={() => onChange("hasTinnitus", true)}
               type="button"
@@ -103,6 +104,7 @@ export default function IntakeForm({ values, onChange, onSubmit }) {
               Yes
             </button>
             <button
+              aria-pressed={!values.hasTinnitus}
               className={!values.hasTinnitus ? "toggle active" : "toggle"}
               onClick={() => onChange("hasTinnitus", false)}
               type="button"

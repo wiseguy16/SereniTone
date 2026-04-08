@@ -158,9 +158,10 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
       </div>
 
       <div className="panel intro-card-panel">
-        <div className="intro-step-dots" role="tablist" aria-label="SereniTone introduction">
+        <div className="intro-step-dots" aria-label="SereniTone introduction steps">
           {INTRO_STEPS.map((step, index) => (
             <button
+              aria-pressed={index === activeStep}
               key={step.title}
               className={index === activeStep ? "intro-step-dot active" : "intro-step-dot"}
               onClick={() => setActiveStep(index)}
@@ -215,6 +216,7 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
         <div className="choice-grid">
           {SOUND_CHOICES.map((choice) => (
             <button
+              aria-pressed={selectedCharacter === choice.value}
               key={choice.value}
               className={
                 selectedCharacter === choice.value ? "choice-card active" : "choice-card"
