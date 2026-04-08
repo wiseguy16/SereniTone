@@ -215,7 +215,8 @@ button {
 .welcome-grid,
 .dashboard-grid,
 .intro-flow,
-.setup-bridge {
+.setup-bridge,
+.companion-callout {
   display: grid;
   gap: 1.25rem;
   margin-top: 1.25rem;
@@ -235,6 +236,10 @@ button {
 }
 
 .setup-bridge {
+  grid-template-columns: 1fr;
+}
+
+.companion-callout {
   grid-template-columns: 1fr;
 }
 
@@ -260,6 +265,31 @@ button {
   background: rgba(10, 20, 28, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.companion-callout-panel,
+.companion-inline-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.companion-callout-panel h2 {
+  margin: 0;
+  max-width: 22ch;
+}
+
+.companion-inline-card p {
+  margin: 0;
+}
+
+.companion-link {
+  color: #ffd4a6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.companion-link:hover {
+  text-decoration: underline;
 }
 
 .panel-heading h2,

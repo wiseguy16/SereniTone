@@ -9,6 +9,7 @@ import { buildProfile, DEFAULT_PARAMS, profileToParams } from "./logic/profile";
 
 const PRESET_STORAGE_KEY = "serenitone-presets";
 const PRESET_STORAGE_VERSION = 2;
+const TINNITUS_GUIDE_URL = "https://wiseguy16.github.io/TinnitusGuide/";
 
 const INITIAL_FORM = {
   hasTinnitus: true,
@@ -300,6 +301,26 @@ export default function App() {
         onContinue={handleContinueToSetup}
       />
 
+      <section className="companion-callout">
+        <div className="panel companion-callout-panel">
+          <p className="eyebrow">Need Help Describing The Sound Itself?</p>
+          <h2>TinnitusGuide helps you identify what you hear. SereniTone helps you find what may feel soothing.</h2>
+          <p className="muted-text">
+            The sound you notice and the sound that helps are not always the same.
+            TinnitusGuide can help you put words to ringing, hiss, buzz, hum, or pulse,
+            especially if you want to explain it clearly to an ENT or audiologist.
+          </p>
+          <a
+            className="companion-link"
+            href={TINNITUS_GUIDE_URL}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Explore TinnitusGuide
+          </a>
+        </div>
+      </section>
+
       {showSetup || profile ? (
         <>
           <section className="setup-bridge" ref={setupRef}>
@@ -315,7 +336,30 @@ export default function App() {
           </section>
 
           <section className="workspace">
-            <IntakeForm values={formValues} onChange={handleFormChange} onSubmit={handleGenerate} />
+            <div className="stack">
+              <div className="panel companion-inline-card">
+                <p className="eyebrow">Helpful To Know</p>
+                <p>
+                  You do not need to recreate your tinnitus exactly in SereniTone.
+                  The goal here is to create a gentle background sound that may help
+                  the brain focus on what is important and let tinnitus fade into the background.
+                </p>
+                <p className="muted-text">
+                  If you want help identifying the sound itself before continuing,
+                  TinnitusGuide can help you compare ring, hiss, buzz, hum, and pulse.
+                </p>
+                <a
+                  className="companion-link"
+                  href={TINNITUS_GUIDE_URL}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Use TinnitusGuide to describe what you hear
+                </a>
+              </div>
+
+              <IntakeForm values={formValues} onChange={handleFormChange} onSubmit={handleGenerate} />
+            </div>
 
             <div className="stack">
               {profile ? (
@@ -327,6 +371,26 @@ export default function App() {
                     onTogglePlayback={handleTogglePlayback}
                     onFeedback={handleFeedback}
                   />
+                  <div className="panel companion-inline-card">
+                    <p className="eyebrow">Sound Match Vs Relief</p>
+                    <p>
+                      The best soothing sound is not always a copy of what you hear.
+                      SereniTone is meant to give your brain a steadier, supportive sound to follow,
+                      so the tinnitus can feel less important over time.
+                    </p>
+                    <p className="muted-text">
+                      If you want a clearer description of the tinnitus itself to share with a professional,
+                      TinnitusGuide can help with that.
+                    </p>
+                    <a
+                      className="companion-link"
+                      href={TINNITUS_GUIDE_URL}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Open TinnitusGuide
+                    </a>
+                  </div>
                   <Controls params={params} onChange={handleControlChange} />
                 </>
               ) : (
@@ -406,6 +470,14 @@ export default function App() {
                   {item}
                 </p>
               ))}
+              <a
+                className="companion-link"
+                href={TINNITUS_GUIDE_URL}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Want a clearer way to describe the sound itself? Visit TinnitusGuide.
+              </a>
             </div>
           </section>
 
