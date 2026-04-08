@@ -567,15 +567,29 @@ input[type="range"] {
   margin: 0 0 0 auto;
 }
 
+.info-graphic {
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  margin: 0.85rem 0 1rem;
+}
+
 .section-graphic.hero-graphic {
   max-width: 360px;
   margin-top: 1.4rem;
 }
 
 .section-graphic.player-graphic,
-.section-graphic.controls-graphic {
+.section-graphic.controls-graphic,
+.section-graphic.support-graphic {
   max-width: 320px;
   margin: 0.75rem 0 0.85rem;
+}
+
+.info-label {
+  fill: rgba(242, 238, 228, 0.68);
+  font-size: 11px;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 .graphic-line {

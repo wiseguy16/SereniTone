@@ -127,6 +127,20 @@ function DashboardGraphic({ isPlaying }) {
   );
 }
 
+function SupportGraphic() {
+  return (
+    <svg viewBox="0 0 300 120" className="section-graphic support-graphic" aria-hidden="true">
+      <rect x="18" y="22" width="264" height="76" rx="20" className="graphic-chip soft" />
+      <path d="M34 54 C58 32, 82 32, 106 54 S154 78, 178 54 226 32, 250 54 274 74, 282 64" className="graphic-line strong" />
+      <path d="M34 72 C58 60, 82 60, 106 72 S154 84, 178 72 226 58, 250 70 274 80, 282 76" className="graphic-line" />
+      <circle cx="92" cy="54" r="8" className="graphic-dot" />
+      <circle cx="206" cy="72" r="8" className="graphic-dot soft" />
+      <text x="34" y="40" className="info-label">Internal sound</text>
+      <text x="166" y="96" className="info-label">Supportive background sound</text>
+    </svg>
+  );
+}
+
 export default function App() {
   const engineRef = useRef(null);
   const setupRef = useRef(null);
@@ -459,6 +473,7 @@ export default function App() {
                 <p className="eyebrow">How This Helps</p>
                 <h3>Why we suggested this</h3>
               </div>
+              <SupportGraphic />
               <p>{profile.triage?.soundStrategy}</p>
               {profile.triage?.explanation?.map((item) => (
                 <p className="muted-text" key={item}>

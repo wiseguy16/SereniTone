@@ -54,6 +54,76 @@ function IntroGraphic() {
   );
 }
 
+function UnderstandingGraphic() {
+  return (
+    <svg viewBox="0 0 280 110" className="info-graphic" aria-hidden="true">
+      <circle cx="64" cy="56" r="28" className="graphic-ring soft-ring" />
+      <circle cx="64" cy="56" r="14" className="graphic-dot" />
+      <path d="M112 58 H252" className="graphic-line" />
+      <circle cx="158" cy="58" r="7" className="graphic-dot soft" />
+      <circle cx="222" cy="58" r="11" className="graphic-ring" />
+      <path d="M140 34 a16 16 0 1 1 0 24" className="graphic-line strong" />
+    </svg>
+  );
+}
+
+function SoundHelpGraphic() {
+  return (
+    <svg viewBox="0 0 280 110" className="info-graphic" aria-hidden="true">
+      <rect x="18" y="22" width="244" height="66" rx="18" className="graphic-chip soft" />
+      <path d="M34 72 C56 40, 76 42, 98 72 S142 102, 164 72 208 42, 230 70 250 92, 262 80" className="graphic-line strong" />
+      <path d="M34 82 C56 64, 76 64, 98 82 S142 96, 164 82 208 64, 230 82 250 94, 262 90" className="graphic-line" />
+      <rect x="42" y="34" width="42" height="10" rx="5" className="graphic-chip" />
+      <rect x="196" y="34" width="48" height="10" rx="5" className="graphic-chip" />
+    </svg>
+  );
+}
+
+function ExpectationGraphic() {
+  return (
+    <svg viewBox="0 0 280 110" className="info-graphic" aria-hidden="true">
+      <path d="M28 82 H248" className="graphic-line" />
+      <path d="M40 76 C92 76, 118 60, 150 52 S214 36, 238 34" className="graphic-line strong" />
+      <circle cx="58" cy="76" r="7" className="graphic-dot" />
+      <circle cx="146" cy="52" r="7" className="graphic-dot soft" />
+      <circle cx="238" cy="34" r="7" className="graphic-dot" />
+      <text x="44" y="98" className="info-label">Relief</text>
+      <text x="130" y="98" className="info-label">Less reaction</text>
+      <text x="216" y="98" className="info-label">Background</text>
+    </svg>
+  );
+}
+
+function StartGraphic() {
+  return (
+    <svg viewBox="0 0 280 110" className="info-graphic" aria-hidden="true">
+      <path d="M34 34 H246" className="graphic-line strong" />
+      <path d="M34 60 H246" className="graphic-line" />
+      <path d="M34 84 H246" className="graphic-line" />
+      <circle cx="210" cy="34" r="8" className="graphic-dot soft" />
+      <circle cx="184" cy="60" r="8" className="graphic-dot" />
+      <text x="40" y="28" className="info-label">Too loud</text>
+      <text x="40" y="54" className="info-label">Tinnitus</text>
+      <text x="40" y="78" className="info-label">Good start</text>
+    </svg>
+  );
+}
+
+function StepGraphic({ eyebrow }) {
+  switch (eyebrow) {
+    case "Understanding":
+      return <UnderstandingGraphic />;
+    case "Why Sound Helps":
+      return <SoundHelpGraphic />;
+    case "What To Expect":
+      return <ExpectationGraphic />;
+    case "How To Start":
+      return <StartGraphic />;
+    default:
+      return null;
+  }
+}
+
 export default function IntroCards({ selectedCharacter, onSelectCharacter, onContinue }) {
   const [activeStep, setActiveStep] = useState(0);
   const currentStep = INTRO_STEPS[activeStep];
@@ -106,6 +176,7 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
         <div className="intro-card">
           <p className="eyebrow">{currentStep.eyebrow}</p>
           <h3>{currentStep.title}</h3>
+          <StepGraphic eyebrow={currentStep.eyebrow} />
           <p>{currentStep.body}</p>
           <p className="muted-text">{currentStep.note}</p>
         </div>
