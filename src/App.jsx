@@ -144,6 +144,7 @@ function SupportGraphic() {
 export default function App() {
   const engineRef = useRef(null);
   const setupRef = useRef(null);
+  const playerRef = useRef(null);
   const [formValues, setFormValues] = useState(INITIAL_FORM);
   const [profile, setProfile] = useState(null);
   const [params, setParams] = useState(DEFAULT_PARAMS);
@@ -215,6 +216,10 @@ export default function App() {
     setProfile(nextProfile);
     setParams(nextParams);
     setError("");
+
+    window.setTimeout(() => {
+      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
   };
 
   const handleTogglePlayback = async () => {
@@ -378,13 +383,15 @@ export default function App() {
             <div className="stack">
               {profile ? (
                 <>
-                  <Player
-                    profile={profile}
-                    params={params}
-                    isPlaying={isPlaying}
-                    onTogglePlayback={handleTogglePlayback}
-                    onFeedback={handleFeedback}
-                  />
+                  <div ref={playerRef}>
+                    <Player
+                      profile={profile}
+                      params={params}
+                      isPlaying={isPlaying}
+                      onTogglePlayback={handleTogglePlayback}
+                      onFeedback={handleFeedback}
+                    />
+                  </div>
                   <div className="panel companion-inline-card">
                     <p className="eyebrow">Sound Match Vs Relief</p>
                     <p>
