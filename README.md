@@ -1,159 +1,179 @@
 # SereniTone
 
-SereniTone is a browser-based sound support prototype for people who experience tinnitus-like ringing, sound sensitivity, or focus disruption from quiet or inconsistent background noise. It generates a non-diagnostic personalized soundscape in the browser, lets the user adjust it live, and explains why a certain starting mix was chosen.
+SereniTone is a browser-based sound support prototype for people who notice tinnitus-like ringing, hissing, humming, sound sensitivity, or focus disruption when quiet makes internal sound feel more obvious.
+
+It is not a diagnosis tool. It is a guided soundscape tool designed to help users move from anxiety and guesswork toward a gentler, more supportive listening environment.
 
 ## Who It's For
 
-SereniTone is designed for knowledge workers, students, and other desk-based users who:
+SereniTone is for people who:
 
-- notice ringing, hissing, buzzing, humming, or sound sensitivity in quiet environments
-- have trouble focusing because silence makes internal sound more obvious
-- want a controllable background sound instead of looping playlists or random ambient videos
-- want something soothing and practical, but not framed as a medical diagnosis tool
+- notice tinnitus-like internal sound in quiet settings
+- feel more distracted, tense, or overstimulated because of that sound
+- want a controllable background sound instead of static playlists or random ambient videos
+- want something supportive and practical without having to enter a full medical workflow first
+
+The current product is especially oriented toward desk-based users, students, and knowledge workers, but the interaction model also fits people looking for relief during relaxation or bedtime.
 
 ## Problem
 
-Many users with tinnitus-like symptoms or noise sensitivity do not need a full clinical workflow first. They need a way to quickly:
+Many people do not need a complex clinical product as their first step. They need a way to:
 
-- describe what they are experiencing in plain language
-- understand whether the pattern sounds more steady, intermittent, or rhythmic
+- understand that sound support can be helpful
+- get to a usable starting mix quickly
 - reduce the contrast between silence and the sound they notice
-- find a background sound that is calming enough to keep using
+- adjust the environment in real time based on what feels better or worse
 
-The problem with existing options is that they are often either:
+Existing alternatives often fall into one of three categories:
 
 - too medical and intimidating
 - too generic and static
-- too entertainment-oriented to be useful for steady relief or focus
+- too entertainment-oriented to be useful as a relief tool
+
+There is an opportunity to build something more focused: a calm, browser-based sound environment that explains itself, adapts live, and stays simple.
 
 ## Solution
 
-SereniTone uses a short intake flow to triage the user's experience, choose a starting soothing model, and generate a procedural soundscape entirely in the browser.
+SereniTone uses a guided onboarding flow, a short intake, and a procedural browser audio engine to create a gentle starting soundscape that the user can refine.
 
 Current prototype behavior:
 
-- collects intake information about tinnitus pattern, sound sensitivity, sound character, timing, main challenge, listening environment, and preferred audio type
-- generates a non-diagnostic triage summary explaining what the reported pattern may resemble
-- recommends one of two soothing starter models:
-  - `Airplane`: low-brightness, steady cabin-style masking
-  - `Ocean`: brighter, softer surf-like masking
-- turns that recommendation into live control values for:
-  - masking
-  - brightness
-  - motion
-  - spatial width
-  - volume
-  - tone layer
-- lets the user start playback, adjust the sound live, and apply feedback like `Too sharp`, `Too busy`, or `Not masking enough`
-- supports advanced optional layers including:
-  - tone layer
-  - insects
-  - birds/chirp accents
+- explains tinnitus and sound therapy in plain language before showing controls
+- asks a short intake about sound character, timing, sensitivity, environment, and goals
+- generates a non-diagnostic triage summary and a starter recommendation
+- maps the user into one of two current starter models:
+  - `Airplane`
+  - `Ocean`
+- creates a live soundscape with controllable masking, brightness, motion, spatial width, and volume
+- supports optional layers like tone, insects, and chirp-like accents
+- lets the user give quick feedback such as `Too sharp` or `Not masking enough`
 - saves presets locally in the browser
+- links to `TinnitusGuide` when the user needs help describing the sound they hear, rather than shaping the relief sound itself
 
-Why this approach:
+Why this solution:
 
-- it keeps the product interactive and personalized
-- it avoids the complexity, cost, and risk of backend AI music generation
-- it matches the real user need better: a tunable supportive sound environment, not a streaming catalog
+- it addresses the actual user need better than “AI-generated music”
+- it keeps the product fully client-side and low-cost
+- it allows real-time control without backend complexity
+- it reinforces an important mental model: the sound that helps is not always the same as the sound the user hears internally
 
-## Key Decisions and Tradeoffs
+## Key Decisions & Tradeoffs
 
-### 1. Procedural audio instead of AI-generated music
-
-Decision:
-- build with Tone.js and Web Audio instead of model-generated audio or music APIs
-
-Why:
-- no backend required
-- no licensing complexity
-- lower technical risk for a prototype
-- real-time adjustment is easier
-
-Tradeoff:
-- the output is less realistic than true recorded ambience or produced music
-- some optional layers, especially bird-like sounds, are necessarily synthetic
-
-### 2. Non-diagnostic triage instead of clinical assessment
+### 1. Procedural audio instead of AI music generation
 
 Decision:
-- the intake explains patterns and flags caution cases, but does not diagnose
+
+- build with Tone.js and the Web Audio API instead of backend generation or music APIs
 
 Why:
-- that keeps the project safe, feasible, and aligned with browser-only scope
-- it still gives the user enough context to feel guided
+
+- no server required
+- no licensing issues
+- low deployment cost
+- immediate live control
 
 Tradeoff:
-- the triage can only support orientation, not medical certainty
 
-### 3. Named soothing models instead of fully freeform generation
+- the output is synthetic rather than photorealistic audio
+- some optional nature-like layers are stylized approximations
+
+### 2. Guided wellness framing instead of clinical framing
 
 Decision:
-- use reference models like `Airplane` and `Ocean` to guide starting settings
+
+- make SereniTone a non-diagnostic support tool, not a medical assessment
 
 Why:
-- they are easier for users to understand and compare
-- they provide a stronger starting point than raw slider math alone
+
+- better aligned with the current scope
+- less intimidating for first-time users
+- safer and more feasible for a browser-only prototype
 
 Tradeoff:
+
+- the product can orient and support, but not diagnose
+
+### 3. Named starter models instead of fully open-ended generation
+
+Decision:
+
+- use understandable starter models like `Airplane` and `Ocean`
+
+Why:
+
+- easier for users to interpret
+- better starting point than raw parameter math
+- creates a stronger sense of intentionality
+
+Tradeoff:
+
 - the recommendation logic is heuristic
-- it currently uses a small preset family instead of a large taxonomy
+- the preset family is still small
 
-### 4. Optional texture layers instead of realistic nature recordings
+### 4. Companion-site split between understanding and relief
 
 Decision:
-- add optional synthetic layers such as insects and chirp-like bird accents
+
+- separate `TinnitusGuide` from `SereniTone`
 
 Why:
-- keeps everything client-side and editable
-- makes the product more exploratory without requiring samples or licensing
+
+- SereniTone works better when it focuses on soothing sound support
+- users often need help describing tinnitus, but that is a different problem
 
 Tradeoff:
-- these layers are texture approximations, not field recordings
+
+- there are now two related products to maintain
+- some users will move between sites instead of staying in one flow
 
 ## Scope Decisions
 
 ### Built in this version
 
-- browser-based React app
-- Tone.js / Web Audio sound engine
-- intake and triage flow
-- model-driven starting presets
-- live sound controls
-- feedback loop
+- onboarding with educational context
+- intake and non-diagnostic triage
+- starter model selection
+- live procedural audio playback
+- quick feedback loop
 - local preset saving
+- mobile-improved sliders
+- companion links to `TinnitusGuide`
+- GitHub Pages deployment
 
 ### Chose not to build
 
-- medical diagnosis or hearing testing
+- medical diagnosis
+- clinical hearing testing
 - user accounts
-- backend services or APIs
-- streaming audio libraries
+- backend persistence
+- clinician dashboard
 - realistic sample libraries
 - machine learning inference
-- clinician dashboard or patient records
+- streaming catalog features
 
-These choices kept the project focused on one strong idea: help a user quickly get to a soothing and adjustable background sound environment.
+These choices kept the project focused on one clear job: help the user reach a gentler sound environment quickly.
+
+## What I Would Do Next With More Time
+
+- add a stronger `Understand Your Sound` bridge between onboarding and setup
+- improve the difference between `Masking` and `Volume` so the controls feel more semantically distinct
+- add more nuanced starter models beyond `Airplane` and `Ocean`
+- improve the realism of optional layers or replace them with licensed/sample-based audio
+- track listening history and adjustment patterns over time
+- test the onboarding and sound tuning flow with more real users on mobile and desktop
 
 ## Current Progress
 
-The current prototype is working and includes:
+The current prototype is live and working. It includes:
 
-- intake form with richer triage questions
-- explanatory guidance on what the reported pattern may mean
-- recommended soothing model selection using `Airplane` and `Ocean`
-- live browser audio playback
-- stable controls for masking, brightness, motion, spatial width, volume, and tone layer
-- advanced optional layers for insects and bird/chirp accents
-- feedback buttons that update parameters in session
-- local preset saving and reload
-
-Known limitations:
-
-- the generated audio is intentionally synthetic
-- optional nature layers are stylized, not realistic recordings
-- the triage language is informational and non-diagnostic
-- model selection is rule-based, not personalized over long-term usage yet
+- a context-first onboarding flow
+- intake language designed for non-experts
+- educational visuals that explain the relief model
+- a functioning browser sound engine
+- stable live controls and feedback buttons
+- preset save/load/delete behavior using local storage
+- iPhone-friendly slider improvements
+- cross-linking with `TinnitusGuide`
 
 ## Running Locally
 
@@ -164,31 +184,22 @@ npm run dev
 
 Then open the local Vite URL, usually `http://127.0.0.1:5173/`.
 
-## Deploying to GitHub Pages
+## Deploying To GitHub Pages
 
-This repo is now set up to deploy to GitHub Pages through GitHub Actions.
+This repo is set up to deploy to GitHub Pages through GitHub Actions.
 
 ### One-time GitHub setup
 
-1. Push this project to a GitHub repository.
+1. Push the project to a GitHub repository.
 2. In GitHub, open `Settings` -> `Pages`.
 3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
-4. Make sure your default branch is `main`.
+4. Make sure the default branch is `main`.
 
 ### Deploy flow
 
-After that, every push to `main` will trigger the workflow in [`.github/workflows/deploy.yml`](/Users/gwe48a/Documents/CodexCode/SereniTone/.github/workflows/deploy.yml) and publish the contents of `dist/` to GitHub Pages.
+Every push to `main` triggers the workflow in [`.github/workflows/deploy.yml`](/Users/gwe48a/Documents/CodexCode/SereniTone/.github/workflows/deploy.yml) and publishes the contents of `dist/` to GitHub Pages.
 
-The Vite config in [`vite.config.js`](/Users/gwe48a/Documents/CodexCode/SereniTone/vite.config.js) automatically sets the correct base path for:
-
-- a project site such as `https://username.github.io/serenitone/`
-- or a user/org root site such as `https://username.github.io/`
-
-### Notes
-
-- Audio still requires a user gesture after the page loads, which is expected for Web Audio in browsers.
-- Presets are stored in each browser's local storage, so they do not sync across devices.
-- If you rename the GitHub repository later, the published base path will also change.
+The Vite base path is configured in [`vite.config.js`](/Users/gwe48a/Documents/CodexCode/SereniTone/vite.config.js).
 
 ## Tech Stack
 
