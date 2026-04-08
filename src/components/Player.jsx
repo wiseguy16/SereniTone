@@ -49,6 +49,14 @@ export default function Player({
         {isPlaying ? "Pause soundscape" : "Start soundscape"}
       </button>
 
+      <div className="player-tip-card">
+        <strong>Listening tip</strong>
+        <p>
+          Start low and keep the mix gentle. You do not need to cover the sound
+          completely for this to feel supportive.
+        </p>
+      </div>
+
       <div className="feedback-grid">
         {FEEDBACK_OPTIONS.map((option) => (
           <button

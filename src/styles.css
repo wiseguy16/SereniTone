@@ -152,6 +152,8 @@ button {
   font-size: 0.78rem;
   line-height: 1.2;
   text-align: center;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .intro-step-dot.active {
@@ -493,6 +495,24 @@ input[type="range"] {
   gap: 0.15rem;
 }
 
+.player-tip-card {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.player-tip-card strong,
+.player-tip-card p {
+  margin: 0;
+}
+
+.player-tip-card p {
+  margin-top: 0.35rem;
+  color: rgba(242, 238, 228, 0.72);
+}
+
 .feedback-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -796,6 +816,19 @@ input[type="range"] {
 
   .hero {
     padding: 2rem;
+  }
+
+  .intro-step-dots {
+    gap: 0.5rem;
+  }
+
+  .intro-step-dot {
+    min-width: 0;
+    padding: 0.65rem 0.35rem 0.75rem;
+  }
+
+  .intro-step-label {
+    font-size: 0.74rem;
   }
 
   .intro-lead,

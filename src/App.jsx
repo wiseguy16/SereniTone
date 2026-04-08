@@ -564,7 +564,10 @@ export default function App() {
               </div>
               <div className="preset-list">
                 {savedPresets.length === 0 ? (
-                  <p className="muted-text">No saved presets yet.</p>
+                  <p className="muted-text">
+                    No saved presets yet. Once a mix feels calmer or easier to
+                    stay with, save it here so you can come back to it.
+                  </p>
                 ) : (
                   savedPresets.map((preset) => (
                     <div className="preset-card" key={preset.id}>
