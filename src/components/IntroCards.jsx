@@ -194,7 +194,9 @@ export default function IntroCards({ selectedCharacter, onSelectCharacter, onCon
           <button
             className="secondary-button"
             onClick={() =>
-              setActiveStep((current) => Math.min(INTRO_STEPS.length - 1, current + 1))
+              setActiveStep((current) => (
+                current === INTRO_STEPS.length - 1 ? 0 : current + 1
+              ))
             }
             type="button"
           >
