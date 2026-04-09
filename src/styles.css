@@ -483,6 +483,87 @@ input[type="range"] {
   font-weight: 700;
 }
 
+.soundscape-button {
+  --soundscape-pulse-duration: 3.2s;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+  clip-path: inset(0 round 16px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.soundscape-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 18%,
+      rgba(240, 154, 75, 0.2) 34%,
+      rgba(255, 248, 236, 0.54) 50%,
+      rgba(240, 154, 75, 0.24) 66%,
+      rgba(255, 255, 255, 0.04) 82%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse at center,
+      rgba(240, 154, 75, 0.28) 0%,
+      rgba(255, 248, 236, 0.1) 42%,
+      transparent 76%
+    );
+  background-size: 180% 100%, 90% 155%;
+  background-position: -120% 50%, -90% 50%;
+  filter: blur(0.45px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.soundscape-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(240, 154, 75, 0.14) 18%,
+    rgba(255, 255, 255, 0.02) 42%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.soundscape-button.is-playing {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 12px 34px rgba(240, 154, 75, 0.26);
+}
+
+.soundscape-button.is-playing::before {
+  animation: soundscapeButtonGlow var(--soundscape-pulse-duration) ease-in-out infinite;
+  opacity: 1;
+}
+
+.soundscape-button.is-playing::after {
+  animation: soundscapeButtonSweep var(--soundscape-pulse-duration) ease-in-out infinite alternate;
+  opacity: 1;
+}
+
+.playback-icon {
+  width: 1.42rem;
+  height: 1.42rem;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
 .secondary-button,
 .toggle,
 .feedback-button,
@@ -511,6 +592,39 @@ input[type="range"] {
 .feedback-button:hover,
 .preset-card:hover {
   transform: translateY(-1px);
+}
+
+@keyframes soundscapeButtonSweep {
+  0% {
+    background-position: -118% 50%, -92% 50%;
+    opacity: 0.22;
+  }
+  50% {
+    background-position: 2% 50%, 0% 50%;
+    opacity: 0.84;
+  }
+  100% {
+    background-position: 118% 50%, 100% 50%;
+    opacity: 0.22;
+  }
+}
+
+@keyframes soundscapeButtonGlow {
+  0%, 100% {
+    opacity: 0.32;
+  }
+  50% {
+    opacity: 0.68;
+  }
+}
+
+@keyframes soundscapeButtonGlow {
+  0%, 100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.76;
+  }
 }
 
 .player-summary {

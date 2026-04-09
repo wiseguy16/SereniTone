@@ -141,6 +141,23 @@ function SupportGraphic() {
   );
 }
 
+function PlaybackIcon({ isPlaying }) {
+  if (isPlaying) {
+    return (
+      <svg aria-hidden="true" className="playback-icon" viewBox="0 0 24 24">
+        <rect x="6" y="5" width="4" height="14" rx="1.2" />
+        <rect x="14" y="5" width="4" height="14" rx="1.2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" className="playback-icon" viewBox="0 0 24 24">
+      <path d="M8 5.5 L19 12 L8 18.5 Z" />
+    </svg>
+  );
+}
+
 function prefersReducedMotion() {
   return typeof window !== "undefined"
     && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -158,6 +175,9 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState("");
   const [showSetup, setShowSetup] = useState(false);
+
+  const motionRatio = Math.min(1, Math.max(0, (params.motionSpeed - 0.03) / (0.8 - 0.03)));
+  const pulseDuration = `${(3.2 - motionRatio * 1.25).toFixed(2)}s`;
 
   if (!engineRef.current) {
     engineRef.current = createSoundscapeEngine();
@@ -470,7 +490,15 @@ export default function App() {
               </div>
               <div className="dashboard-hero-actions">
                 <DashboardGraphic isPlaying={isPlaying} />
-                <button className="primary-button" onClick={handleTogglePlayback} type="button">
+                <button
+                  className={isPlaying ? "primary-button soundscape-button is-playing" : "primary-button soundscape-button"}
+                  onClick={handleTogglePlayback}
+                  style={{
+                    "--soundscape-pulse-duration": pulseDuration,
+                  }}
+                  type="button"
+                >
+                  <PlaybackIcon isPlaying={isPlaying} />
                   {isPlaying ? "Pause soundscape" : "Start soundscape"}
                 </button>
               </div>
